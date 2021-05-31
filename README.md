@@ -1,3 +1,7 @@
+## WORK IN PROGRESS
+
+**This project does not currently run.  This is currently just the shell of a project.  See the TODOs down below.**
+
 # Humble Lotus EBook Downloader
 The goal of this is to list all book bundles and enable you to select which bundle to download
 
