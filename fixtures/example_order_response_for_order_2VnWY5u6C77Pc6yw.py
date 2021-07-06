@@ -1,7 +1,7 @@
 import pytest
 
 @pytest.fixture()
-def example_response_for_order_2VnWY5u6C77Pc6yw():
+def example_order_response_for_order_2VnWY5u6C77Pc6yw():
     return '''HTTP/2 200 OK
 Cache-Control: no-cache
 Content-Type: application/json; charset=utf-8
