@@ -1,6 +1,6 @@
 import pytest
 
-@pytest.fixture()
+@pytest.fixture
 def example_order_response_for_order_2VnWY5u6C77Pc6yw():
     return '''HTTP/2 200 OK
 Cache-Control: no-cache
