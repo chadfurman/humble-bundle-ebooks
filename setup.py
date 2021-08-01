@@ -8,5 +8,7 @@ setup(name='humble-bundle-api',
       author='Lotus',
       packages=find_packages(include=['pytest']),
       install_requires=[
-          "pytest", "colorama"])
+          "pytest",
+          "colorama",
+          "sqlitedict"])
 

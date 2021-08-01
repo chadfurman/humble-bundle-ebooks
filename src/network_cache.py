@@ -11,6 +11,7 @@ class NetworkLayer(object):
     pass
 
 
+# TODO: Convert NetworkCache to use SQLiteDict
 class NetworkCache(object):
     _cache = None
 
