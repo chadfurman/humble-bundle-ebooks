@@ -2,8 +2,8 @@ import pickle
 
 import pytest
 from unittest.mock import patch, mock_open
-from NetworkCache import cache, LIBRARY_PAGE_URL, ORDER_ENDPOINT_URL, NetworkLayer
-import Credentials
+from network_cache import cache, LIBRARY_PAGE_URL, ORDER_ENDPOINT_URL, NetworkLayer
+import credentials
 from fixtures import example_library_page_response, example_order_response_for_order_2VnWY5u6C77Pc6yw, example_order_response_for_order_2cut2AGkahN7WqBK, example_order_response_for_order_2AZm2qDRvVUeqbKY, cache_fixture
 
 

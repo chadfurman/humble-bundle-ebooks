@@ -1,7 +1,6 @@
 import pytest
-from fixtures import *
 
-from app.bundle_store import BundleStore
+from bundle_store import BundleStore
 
 def test_bundle_store_retrieves_all_bundle_ids(cache_fixture):
     bundle_ids = BundleStore(cache=cache_fixture).get_all_bundle_ids()

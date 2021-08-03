@@ -1,5 +1,4 @@
 from network_cache import NetworkCache
-from sqlitedict import SqliteDict
 
 # TODO: use NetworkCache and let NetworkCache use SqliteDict
 class BundleStore(object):
