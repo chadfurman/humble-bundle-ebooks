@@ -7,8 +7,15 @@ Welcome to Humble Bundle API's documentation!
 =============================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree: generated
+
+   __init__
 
 
 
