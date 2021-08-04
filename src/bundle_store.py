@@ -6,4 +6,4 @@ class BundleStore(object):
         self.cache = cache
 
     def get_all_bundle_ids(self):
-        return []
+        return list(self.cache.get("orders").keys())
