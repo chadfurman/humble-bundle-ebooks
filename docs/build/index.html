@@ -15,7 +15,6 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="__init__" href="generated/__init__.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,11 +42,346 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/__init__.html#module-__init__" title="__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a></p></td>
-<td><p>The Humble Bundle API</p></td>
-</tr>
 </tbody>
 </table>
+<dl class="py class">
+<dt class="sig sig-object py" id="bundle_service.BundleService">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bundle_service.</span></span><span class="sig-name descname"><span class="pre">BundleService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#network_cache.NetworkCache" title="network_cache.NetworkCache"><span class="pre">network_cache.NetworkCache</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bundle_service.html#BundleService"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bundle_service.BundleService" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is where the data for your Humble Bundle library can be accessed</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="bundle_service.BundleService.get_all_bundle_ids">
+<span class="sig-name descname"><span class="pre">get_all_bundle_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bundle_service.html#BundleService.get_all_bundle_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bundle_service.BundleService.get_all_bundle_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of bundle IDs stored in the local <cite>cache</cite> which is an instance of <a class="reference internal" href="#network_cache.NetworkCache" title="network_cache.NetworkCache"><code class="xref py py-class docutils literal notranslate"><span class="pre">network_cache.NetworkCache</span></code></a></p>
+<p>Can be used if you need to iterate over all your different bundles, for example to query for their data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of bundle IDs</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bundle_service.BundleService.get_all_bundles_with_metadata">
+<span class="sig-name descname"><span class="pre">get_all_bundles_with_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bundle_service.html#BundleService.get_all_bundles_with_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bundle_service.BundleService.get_all_bundles_with_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary whose keys are bundle IDs and whose values are also dictionaries.</p>
+<p>Each bundle ID holds a dictionary containing all data returned from the network call for the bundle.</p>
+<p>An example dictionary could look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;amount_spent&quot;</span><span class="p">:</span><span class="mf">15.0</span><span class="p">,</span>
+    <span class="s2">&quot;product&quot;</span><span class="p">:{</span>
+        <span class="s2">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;bundle&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;my_bundle&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;empty_tpkds&quot;</span><span class="p">:{},</span>
+        <span class="s2">&quot;post_purchase_text&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;human_name&quot;</span><span class="p">:</span><span class="s2">&quot;My Bundle&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;partial_gift_enabled&quot;</span><span class="p">:</span><span class="n">true</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;gamekey&quot;</span><span class="p">:</span><span class="s2">&quot;2idt2IDidD7IdBi&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uid&quot;</span><span class="p">:</span><span class="s2">&quot;IDIDIDIDIDIDI&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;all_coupon_data&quot;</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;coupon_min_count&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_valid_products&quot;</span><span class="p">:[],</span>
+            <span class="s2">&quot;coupon_type&quot;</span><span class="p">:</span><span class="s2">&quot;relative-discount-plan&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_discount&quot;</span><span class="p">:</span><span class="mf">10.0</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;humblemonthly_10percentoff_bundle&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_credit&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_max_count&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;subscriptions&quot;</span><span class="p">:[</span>
+                <span class="s2">&quot;humble_monthly&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;coupon_exclude_monthly&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_expiration&quot;</span><span class="p">:</span><span class="s2">&quot;2019-06-07T17:00:00+00:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_price&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_stack&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_key&quot;</span><span class="p">:</span><span class="mi">4961411114177280</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_storefront_link&quot;</span><span class="p">:</span><span class="s2">&quot;/subscription&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;storefront_product&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;strings&quot;</span><span class="p">:{</span>
+                <span class="s2">&quot;terms&quot;</span><span class="p">:</span><span class="s2">&quot;Single use coupon. Coupon redeemable for 10</span><span class="si">% o</span><span class="s2">ff one month of Humble Choice for new subscribers. This coupon may not be combined with other identical coupons in the same transaction, and may not be combined with other Humble Bundle coupons. Discount will be automatically applied at time of checkout. Coupon has no cash value. Void where prohibited or restricted by law. Coupon may not be reproduced, copied, purchased, traded or sold. Unauthorized transfer of coupon and internet distribution strictly prohibited.&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;coupon_status&quot;</span><span class="p">:</span><span class="s2">&quot;expired&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_human_name&quot;</span><span class="p">:</span><span class="s2">&quot;10</span><span class="si">% o</span><span class="s2">ff your first month of Humble Choice&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;coupon_min_count&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_valid_products&quot;</span><span class="p">:[</span>
+                <span class="s2">&quot;nationalpark_storefront&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;coupon_type&quot;</span><span class="p">:</span><span class="s2">&quot;discount-percentage&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_discount&quot;</span><span class="p">:</span><span class="mf">20.0</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;20percentoff_nationalpark_bundle&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_credit&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_max_count&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_exclude_monthly&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_expiration&quot;</span><span class="p">:</span><span class="s2">&quot;2019-04-23T18:00:00+00:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_price&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_stack&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_key&quot;</span><span class="p">:</span><span class="mi">6616111111111118</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_storefront_link&quot;</span><span class="p">:</span><span class="s2">&quot;/store/national-park&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;storefront_product&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;nationalpark_storefront&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;platform_icon_dict&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;steam&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;available&quot;</span><span class="p">:[</span>
+            <span class="s2">&quot;windows&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mac&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;linux&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;unavailable&quot;</span><span class="p">:[]</span>
+            <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;human_url&quot;</span><span class="p">:</span><span class="s2">&quot;national-park&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;currency&quot;</span><span class="p">:</span><span class="s2">&quot;USD&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;discount_price|money&quot;</span><span class="p">:{</span>
+            <span class="s2">&quot;currency&quot;</span><span class="p">:</span><span class="s2">&quot;USD&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;amount&quot;</span><span class="p">:</span><span class="mf">3.99</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;icon&quot;</span><span class="p">:</span><span class="s2">&quot;https://hb.imgix.net/123.jpeg?...&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;strings&quot;</span><span class="p">:{},</span>
+            <span class="s2">&quot;coupon_status&quot;</span><span class="p">:</span><span class="s2">&quot;expired&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_human_name&quot;</span><span class="p">:</span><span class="s2">&quot;20</span><span class="si">% o</span><span class="s2">ff National Park&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;coupon_min_count&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_valid_products&quot;</span><span class="p">:[</span>
+                    <span class="s2">&quot;heartofthewoods_storefront&quot;</span>
+                <span class="p">],</span>
+            <span class="s2">&quot;coupon_type&quot;</span><span class="p">:</span><span class="s2">&quot;discount-percentage&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_discount&quot;</span><span class="p">:</span><span class="mf">20.0</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;20percentoff_heartofthewoods_bundle&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_credit&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_max_count&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_exclude_monthly&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_expiration&quot;</span><span class="p">:</span><span class="s2">&quot;2019-04-23T18:00:00+00:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_price&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_stack&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_key&quot;</span><span class="p">:</span><span class="mi">4955766036234240</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_storefront_link&quot;</span><span class="p">:</span><span class="s2">&quot;/store/heart-of-the-woods&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;storefront_product&quot;</span><span class="p">:{</span>
+                <span class="s2">&quot;machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;heartofthewoods_storefront&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;platform_icon_dict&quot;</span><span class="p">:{</span>
+                    <span class="s2">&quot;steam&quot;</span><span class="p">:{</span>
+                        <span class="s2">&quot;available&quot;</span><span class="p">:[</span>
+                            <span class="s2">&quot;windows&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;mac&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;linux&quot;</span>
+                        <span class="p">],</span>
+                        <span class="s2">&quot;unavailable&quot;</span><span class="p">:[]</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;human_url&quot;</span><span class="p">:</span><span class="s2">&quot;heart-of-the-woods&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;currency&quot;</span><span class="p">:</span><span class="s2">&quot;USD&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;discount_price|money&quot;</span><span class="p">:{</span>
+                    <span class="s2">&quot;currency&quot;</span><span class="p">:</span><span class="s2">&quot;USD&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;amount&quot;</span><span class="p">:</span><span class="mf">11.99</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;icon&quot;</span><span class="p">:</span><span class="s2">&quot;https://hb.imgix.net/....jpg?...&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;strings&quot;</span><span class="p">:{},</span>
+            <span class="s2">&quot;coupon_status&quot;</span><span class="p">:</span><span class="s2">&quot;expired&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;coupon_human_name&quot;</span><span class="p">:</span><span class="s2">&quot;20</span><span class="si">% o</span><span class="s2">ff Heart of the Woods&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span><span class="s2">&quot;2019-04-07T22:46:50.938487&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;missed_credit&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;subproducts&quot;</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;blossoms&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://sproject.com/&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;downloads&quot;</span><span class="p">:[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;blossoms_windows&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;platform&quot;</span><span class="p">:</span><span class="s2">&quot;windows&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;download_struct&quot;</span><span class="p">:[</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;sha1&quot;</span><span class="p">:</span><span class="s2">&quot;38c6e8afe3f2e74569cc24845ca29cf6b218603e&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Download&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;url&quot;</span><span class="p">:{</span>
+                                <span class="s2">&quot;web&quot;</span><span class="p">:</span><span class="s2">&quot;https://dl.humble.com/...&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;bittorrent&quot;</span><span class="p">:</span><span class="s2">&quot;https://dl.humble.com/torrents/...&quot;</span>
+                            <span class="p">},</span>
+                            <span class="s2">&quot;human_size&quot;</span><span class="p">:</span><span class="s2">&quot;677.1 MB&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;file_size&quot;</span><span class="p">:</span><span class="mi">709940417</span><span class="p">,</span>
+                            <span class="s2">&quot;small&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                            <span class="s2">&quot;md5&quot;</span><span class="p">:</span><span class="s2">&quot;dedcc64717a853644d54cfabe4413d06&quot;</span>
+                        <span class="p">}</span>
+                    <span class="p">],</span>
+                    <span class="s2">&quot;options_dict&quot;</span><span class="p">:{},</span>
+                    <span class="s2">&quot;download_identifier&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;android_app_only&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+                    <span class="s2">&quot;download_version_number&quot;</span><span class="p">:</span><span class="n">null</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;blossoms_mac&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;platform&quot;</span><span class="p">:</span><span class="s2">&quot;mac&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;download_struct&quot;</span><span class="p">:[</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;sha1&quot;</span><span class="p">:</span><span class="s2">&quot;56b3dc4e25bbc260d633d95251964dabeef158b4&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Download&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;url&quot;</span><span class="p">:{</span>
+                                <span class="s2">&quot;web&quot;</span><span class="p">:</span><span class="s2">&quot;https://dl.humble.com/...&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;bittorrent&quot;</span><span class="p">:</span><span class="s2">&quot;https://dl.humble.com/torrents/...&quot;</span>
+                            <span class="p">},</span>
+                            <span class="s2">&quot;human_size&quot;</span><span class="p">:</span><span class="s2">&quot;676 MB&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;file_size&quot;</span><span class="p">:</span><span class="mi">708870408</span><span class="p">,</span>
+                            <span class="s2">&quot;small&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                            <span class="s2">&quot;md5&quot;</span><span class="p">:</span><span class="s2">&quot;40f45258398694b458ed7481a8f876e0&quot;</span>
+                        <span class="p">}</span>
+                    <span class="p">],</span>
+                    <span class="s2">&quot;options_dict&quot;</span><span class="p">:{},</span>
+                    <span class="s2">&quot;download_identifier&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;android_app_only&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+                    <span class="s2">&quot;download_version_number&quot;</span><span class="p">:</span><span class="n">null</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;blossoms_linux&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;platform&quot;</span><span class="p">:</span><span class="s2">&quot;linux&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;download_struct&quot;</span><span class="p">:[</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;uploaded_at&quot;</span><span class="p">:</span><span class="s2">&quot;2019-03-26T21:28:00.117829&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Download&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;url&quot;</span><span class="p">:{</span>
+                                <span class="s2">&quot;web&quot;</span><span class="p">:</span><span class="s2">&quot;https://dl.humble.com/...&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;bittorrent&quot;</span><span class="p">:</span><span class="s2">&quot;https://dl.humble.com/torrents/...&quot;</span>
+                            <span class="p">},</span>
+                            <span class="s2">&quot;human_size&quot;</span><span class="p">:</span><span class="s2">&quot;679.3 MB&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;file_size&quot;</span><span class="p">:</span><span class="mi">712316687</span><span class="p">,</span>
+                            <span class="s2">&quot;small&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                            <span class="s2">&quot;md5&quot;</span><span class="p">:</span><span class="s2">&quot;c1fd03437e15903792982f1b3e5d3fb3&quot;</span>
+                        <span class="p">}</span>
+                    <span class="p">],</span>
+                    <span class="s2">&quot;options_dict&quot;</span><span class="p">:{},</span>
+                    <span class="s2">&quot;download_identifier&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+                    <span class="s2">&quot;android_app_only&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+                    <span class="s2">&quot;download_version_number&quot;</span><span class="p">:</span><span class="n">null</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;library_family_name&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;payee&quot;</span><span class="p">:{</span>
+                <span class="s2">&quot;human_name&quot;</span><span class="p">:</span><span class="s2">&quot;S Project&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;s_project&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;human_name&quot;</span><span class="p">:</span><span class="s2">&quot;Blossoms&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;custom_download_page_box_css&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span>
+            <span class="s2">&quot;custom_download_page_box_html&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;icon&quot;</span><span class="p">:</span><span class="s2">&quot;https://hb.imgix.net/123.png?...&quot;</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;total_choices&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;tpkd_dict&quot;</span><span class="p">:{</span>
+        <span class="s2">&quot;all_tpks&quot;</span><span class="p">:[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;machine_name&quot;</span><span class="p">:</span><span class="s2">&quot;blossoms_bundle_steam&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;gamekey&quot;</span><span class="p">:</span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;exclusive_countries&quot;</span><span class="p">:[],</span>
+                <span class="s2">&quot;num_days_until_expired&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;disallowed_countries&quot;</span><span class="p">:[],</span>
+                <span class="s2">&quot;show_custom_instructions_in_user_libraries&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+                <span class="s2">&quot;key_type&quot;</span><span class="p">:</span><span class="s2">&quot;steam&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;visible&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+                <span class="s2">&quot;sold_out&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+                <span class="s2">&quot;instructions_html&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;a href=&#39;https://support.humblebundle.com/hc/articles/204008710-How-To-Redeem-Steam-Keys&#39; target=&#39;_blank&#39;&gt;Steam Instructions&lt;/a&gt;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;display_separately&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+                <span class="s2">&quot;direct_redeem&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+                <span class="s2">&quot;key_type_human_name&quot;</span><span class="p">:</span><span class="s2">&quot;Steam&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;steam_app_id&quot;</span><span class="p">:</span><span class="mi">451760</span><span class="p">,</span>
+                <span class="s2">&quot;human_name&quot;</span><span class="p">:</span><span class="s2">&quot;Highway Blossoms&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;preinstruction_text&quot;</span><span class="p">:</span><span class="s2">&quot;Copy this key into the Steam client, or click Redeem to redeem in-browser.&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;auto_expand&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+                <span class="s2">&quot;is_expired&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+                <span class="s2">&quot;class&quot;</span><span class="p">:</span><span class="s2">&quot;steambutton&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;keyindex&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;disclaimer&quot;</span><span class="p">:</span><span class="s2">&quot;Steam will not provide extra giftable copies of games you already own.&quot;</span>
+            <span class="p">},</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;choices_remaining&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;currency&quot;</span><span class="p">:</span><span class="s2">&quot;USD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;is_giftee&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;claimed&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;total&quot;</span><span class="p">:</span><span class="mf">15.0</span><span class="p">,</span>
+    <span class="s2">&quot;path_ids&quot;</span><span class="p">:[</span>
+        <span class="s2">&quot;5921558011118848&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="network_cache.NetworkCache">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">network_cache.</span></span><span class="sig-name descname"><span class="pre">NetworkCache</span></span><a class="reference internal" href="_modules/network_cache.html#NetworkCache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#network_cache.NetworkCache" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="network_cache.NetworkCache.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="reference internal" href="_modules/network_cache.html#NetworkCache.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#network_cache.NetworkCache.get" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/network_cache.html#NetworkCache.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Returns the value from the network cache corresponding to the provided <code class="docutils literal notranslate"><span class="pre">key</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Does not refresh the cache</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – The key to pull out of the network cache</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The deserialized value stored at the key in the cache</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="network_cache.NetworkCache.load_cache">
+<span class="sig-name descname"><span class="pre">load_cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/network_cache.html#NetworkCache.load_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#network_cache.NetworkCache.load_cache" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="network_cache.NetworkCache.refresh_cache">
+<span class="sig-name descname"><span class="pre">refresh_cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/network_cache.html#NetworkCache.refresh_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#network_cache.NetworkCache.refresh_cache" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py function">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">refresh_cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/network_cache.html#NetworkCache.refresh_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Pull the latest data down from Humble Bundle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-__init__"></span><p>The Humble Bundle API</p>
+<section id="humble-bundle-api">
+<h2>Humble Bundle API<a class="headerlink" href="#humble-bundle-api" title="Permalink to this headline">¶</a></h2>
+<p>A library for interacting with the Humble Bundle data cache.
+This is the data cache that Humble Bundle loads client-side when you navigate your products.
+The goal of this library is to facilitate other tools to be built around the Humble Bundle store, since the web-based index can be limiting.
+Specifically, I built this library with the intention of making a Calibre plugin for fetching ebooks remotely.</p>
+</section>
 </section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -75,15 +409,11 @@
 
 
 <h3>Navigation</h3>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="generated/__init__.html">__init__</a></li>
-</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="generated/__init__.html" title="next chapter">__init__</a></li>
   </ul></li>
 </ul>
 </div>

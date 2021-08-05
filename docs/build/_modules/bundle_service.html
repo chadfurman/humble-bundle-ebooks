@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bundle_service &#8212; Humble Bundle API  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for bundle_service</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">network_cache</span> <span class="kn">import</span> <span class="n">NetworkCache</span>
+
+<div class="viewcode-block" id="BundleService"><a class="viewcode-back" href="../index.html#bundle_service.BundleService">[docs]</a><span class="k">class</span> <span class="nc">BundleService</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is where the data for your Humble Bundle library can be accessed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache</span><span class="p">:</span> <span class="n">NetworkCache</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">cache</span>
+
+<div class="viewcode-block" id="BundleService.get_all_bundle_ids"><a class="viewcode-back" href="../index.html#bundle_service.BundleService.get_all_bundle_ids">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_bundle_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of bundle IDs stored in the local `cache` which is an instance of :class:`network_cache.NetworkCache`</span>
+
+<span class="sd">        Can be used if you need to iterate over all your different bundles, for example to query for their data</span>
+
+<span class="sd">        :return: List of bundle IDs</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;orders&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="BundleService.get_all_bundles_with_metadata"><a class="viewcode-back" href="../index.html#bundle_service.BundleService.get_all_bundles_with_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_bundles_with_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a dictionary whose keys are bundle IDs and whose values are also dictionaries.</span>
+
+<span class="sd">        Each bundle ID holds a dictionary containing all data returned from the network call for the bundle.</span>
+
+<span class="sd">        An example dictionary could look like this::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &quot;amount_spent&quot;:15.0,</span>
+<span class="sd">                &quot;product&quot;:{</span>
+<span class="sd">                    &quot;category&quot;:&quot;bundle&quot;,</span>
+<span class="sd">                    &quot;machine_name&quot;:&quot;my_bundle&quot;,</span>
+<span class="sd">                    &quot;empty_tpkds&quot;:{},</span>
+<span class="sd">                    &quot;post_purchase_text&quot;:&quot;&quot;,</span>
+<span class="sd">                    &quot;human_name&quot;:&quot;My Bundle&quot;,</span>
+<span class="sd">                    &quot;partial_gift_enabled&quot;:true</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;gamekey&quot;:&quot;2idt2IDidD7IdBi&quot;,</span>
+<span class="sd">                &quot;uid&quot;:&quot;IDIDIDIDIDIDI&quot;,</span>
+<span class="sd">                &quot;all_coupon_data&quot;:[</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;coupon_min_count&quot;:null,</span>
+<span class="sd">                        &quot;coupon_valid_products&quot;:[],</span>
+<span class="sd">                        &quot;coupon_type&quot;:&quot;relative-discount-plan&quot;,</span>
+<span class="sd">                        &quot;coupon_discount&quot;:10.0,</span>
+<span class="sd">                        &quot;coupon_machine_name&quot;:&quot;humblemonthly_10percentoff_bundle&quot;,</span>
+<span class="sd">                        &quot;coupon_credit&quot;:null,</span>
+<span class="sd">                        &quot;coupon_max_count&quot;:null,</span>
+<span class="sd">                        &quot;subscriptions&quot;:[</span>
+<span class="sd">                            &quot;humble_monthly&quot;</span>
+<span class="sd">                        ],</span>
+<span class="sd">                        &quot;coupon_exclude_monthly&quot;:false,</span>
+<span class="sd">                        &quot;coupon_expiration&quot;:&quot;2019-06-07T17:00:00+00:00&quot;,</span>
+<span class="sd">                        &quot;coupon_price&quot;:null,</span>
+<span class="sd">                        &quot;coupon_stack&quot;:false,</span>
+<span class="sd">                        &quot;coupon_key&quot;:4961411114177280,</span>
+<span class="sd">                        &quot;coupon_storefront_link&quot;:&quot;/subscription&quot;,</span>
+<span class="sd">                        &quot;storefront_product&quot;:null,</span>
+<span class="sd">                        &quot;strings&quot;:{</span>
+<span class="sd">                            &quot;terms&quot;:&quot;Single use coupon. Coupon redeemable for 10% off one month of Humble Choice for new subscribers. This coupon may not be combined with other identical coupons in the same transaction, and may not be combined with other Humble Bundle coupons. Discount will be automatically applied at time of checkout. Coupon has no cash value. Void where prohibited or restricted by law. Coupon may not be reproduced, copied, purchased, traded or sold. Unauthorized transfer of coupon and internet distribution strictly prohibited.&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;coupon_status&quot;:&quot;expired&quot;,</span>
+<span class="sd">                        &quot;coupon_human_name&quot;:&quot;10% off your first month of Humble Choice&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;coupon_min_count&quot;:1,</span>
+<span class="sd">                        &quot;coupon_valid_products&quot;:[</span>
+<span class="sd">                            &quot;nationalpark_storefront&quot;</span>
+<span class="sd">                        ],</span>
+<span class="sd">                        &quot;coupon_type&quot;:&quot;discount-percentage&quot;,</span>
+<span class="sd">                        &quot;coupon_discount&quot;:20.0,</span>
+<span class="sd">                        &quot;coupon_machine_name&quot;:&quot;20percentoff_nationalpark_bundle&quot;,</span>
+<span class="sd">                        &quot;coupon_credit&quot;:null,</span>
+<span class="sd">                        &quot;coupon_max_count&quot;:1,</span>
+<span class="sd">                        &quot;coupon_exclude_monthly&quot;:false,</span>
+<span class="sd">                        &quot;coupon_expiration&quot;:&quot;2019-04-23T18:00:00+00:00&quot;,</span>
+<span class="sd">                        &quot;coupon_price&quot;:null,</span>
+<span class="sd">                        &quot;coupon_stack&quot;:false,</span>
+<span class="sd">                        &quot;coupon_key&quot;:6616111111111118,</span>
+<span class="sd">                        &quot;coupon_storefront_link&quot;:&quot;/store/national-park&quot;,</span>
+<span class="sd">                        &quot;storefront_product&quot;:{</span>
+<span class="sd">                        &quot;machine_name&quot;:&quot;nationalpark_storefront&quot;,</span>
+<span class="sd">                        &quot;platform_icon_dict&quot;:{</span>
+<span class="sd">                        &quot;steam&quot;:{</span>
+<span class="sd">                        &quot;available&quot;:[</span>
+<span class="sd">                        &quot;windows&quot;,</span>
+<span class="sd">                        &quot;mac&quot;,</span>
+<span class="sd">                        &quot;linux&quot;</span>
+<span class="sd">                        ],</span>
+<span class="sd">                        &quot;unavailable&quot;:[]</span>
+<span class="sd">                        }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;human_url&quot;:&quot;national-park&quot;,</span>
+<span class="sd">                        &quot;currency&quot;:&quot;USD&quot;,</span>
+<span class="sd">                        &quot;discount_price|money&quot;:{</span>
+<span class="sd">                        &quot;currency&quot;:&quot;USD&quot;,</span>
+<span class="sd">                        &quot;amount&quot;:3.99</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;icon&quot;:&quot;https://hb.imgix.net/123.jpeg?...&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;strings&quot;:{},</span>
+<span class="sd">                        &quot;coupon_status&quot;:&quot;expired&quot;,</span>
+<span class="sd">                        &quot;coupon_human_name&quot;:&quot;20% off National Park&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;coupon_min_count&quot;:1,</span>
+<span class="sd">                        &quot;coupon_valid_products&quot;:[</span>
+<span class="sd">                                &quot;heartofthewoods_storefront&quot;</span>
+<span class="sd">                            ],</span>
+<span class="sd">                        &quot;coupon_type&quot;:&quot;discount-percentage&quot;,</span>
+<span class="sd">                        &quot;coupon_discount&quot;:20.0,</span>
+<span class="sd">                        &quot;coupon_machine_name&quot;:&quot;20percentoff_heartofthewoods_bundle&quot;,</span>
+<span class="sd">                        &quot;coupon_credit&quot;:null,</span>
+<span class="sd">                        &quot;coupon_max_count&quot;:1,</span>
+<span class="sd">                        &quot;coupon_exclude_monthly&quot;:false,</span>
+<span class="sd">                        &quot;coupon_expiration&quot;:&quot;2019-04-23T18:00:00+00:00&quot;,</span>
+<span class="sd">                        &quot;coupon_price&quot;:null,</span>
+<span class="sd">                        &quot;coupon_stack&quot;:false,</span>
+<span class="sd">                        &quot;coupon_key&quot;:4955766036234240,</span>
+<span class="sd">                        &quot;coupon_storefront_link&quot;:&quot;/store/heart-of-the-woods&quot;,</span>
+<span class="sd">                        &quot;storefront_product&quot;:{</span>
+<span class="sd">                            &quot;machine_name&quot;:&quot;heartofthewoods_storefront&quot;,</span>
+<span class="sd">                            &quot;platform_icon_dict&quot;:{</span>
+<span class="sd">                                &quot;steam&quot;:{</span>
+<span class="sd">                                    &quot;available&quot;:[</span>
+<span class="sd">                                        &quot;windows&quot;,</span>
+<span class="sd">                                        &quot;mac&quot;,</span>
+<span class="sd">                                        &quot;linux&quot;</span>
+<span class="sd">                                    ],</span>
+<span class="sd">                                    &quot;unavailable&quot;:[]</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;human_url&quot;:&quot;heart-of-the-woods&quot;,</span>
+<span class="sd">                            &quot;currency&quot;:&quot;USD&quot;,</span>
+<span class="sd">                            &quot;discount_price|money&quot;:{</span>
+<span class="sd">                                &quot;currency&quot;:&quot;USD&quot;,</span>
+<span class="sd">                                &quot;amount&quot;:11.99</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;icon&quot;:&quot;https://hb.imgix.net/....jpg?...&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;strings&quot;:{},</span>
+<span class="sd">                        &quot;coupon_status&quot;:&quot;expired&quot;,</span>
+<span class="sd">                        &quot;coupon_human_name&quot;:&quot;20% off Heart of the Woods&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                ],</span>
+<span class="sd">                &quot;created&quot;:&quot;2019-04-07T22:46:50.938487&quot;,</span>
+<span class="sd">                &quot;missed_credit&quot;:null,</span>
+<span class="sd">                &quot;subproducts&quot;:[</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;machine_name&quot;:&quot;blossoms&quot;,</span>
+<span class="sd">                        &quot;url&quot;:&quot;https://sproject.com/&quot;,</span>
+<span class="sd">                        &quot;downloads&quot;:[</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;machine_name&quot;:&quot;blossoms_windows&quot;,</span>
+<span class="sd">                                &quot;platform&quot;:&quot;windows&quot;,</span>
+<span class="sd">                                &quot;download_struct&quot;:[</span>
+<span class="sd">                                    {</span>
+<span class="sd">                                        &quot;sha1&quot;:&quot;38c6e8afe3f2e74569cc24845ca29cf6b218603e&quot;,</span>
+<span class="sd">                                        &quot;name&quot;:&quot;Download&quot;,</span>
+<span class="sd">                                        &quot;url&quot;:{</span>
+<span class="sd">                                            &quot;web&quot;:&quot;https://dl.humble.com/...&quot;,</span>
+<span class="sd">                                            &quot;bittorrent&quot;:&quot;https://dl.humble.com/torrents/...&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;human_size&quot;:&quot;677.1 MB&quot;,</span>
+<span class="sd">                                        &quot;file_size&quot;:709940417,</span>
+<span class="sd">                                        &quot;small&quot;:0,</span>
+<span class="sd">                                        &quot;md5&quot;:&quot;dedcc64717a853644d54cfabe4413d06&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                ],</span>
+<span class="sd">                                &quot;options_dict&quot;:{},</span>
+<span class="sd">                                &quot;download_identifier&quot;:&quot;&quot;,</span>
+<span class="sd">                                &quot;android_app_only&quot;:false,</span>
+<span class="sd">                                &quot;download_version_number&quot;:null</span>
+<span class="sd">                            },</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;machine_name&quot;:&quot;blossoms_mac&quot;,</span>
+<span class="sd">                                &quot;platform&quot;:&quot;mac&quot;,</span>
+<span class="sd">                                &quot;download_struct&quot;:[</span>
+<span class="sd">                                    {</span>
+<span class="sd">                                        &quot;sha1&quot;:&quot;56b3dc4e25bbc260d633d95251964dabeef158b4&quot;,</span>
+<span class="sd">                                        &quot;name&quot;:&quot;Download&quot;,</span>
+<span class="sd">                                        &quot;url&quot;:{</span>
+<span class="sd">                                            &quot;web&quot;:&quot;https://dl.humble.com/...&quot;,</span>
+<span class="sd">                                            &quot;bittorrent&quot;:&quot;https://dl.humble.com/torrents/...&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;human_size&quot;:&quot;676 MB&quot;,</span>
+<span class="sd">                                        &quot;file_size&quot;:708870408,</span>
+<span class="sd">                                        &quot;small&quot;:0,</span>
+<span class="sd">                                        &quot;md5&quot;:&quot;40f45258398694b458ed7481a8f876e0&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                ],</span>
+<span class="sd">                                &quot;options_dict&quot;:{},</span>
+<span class="sd">                                &quot;download_identifier&quot;:&quot;&quot;,</span>
+<span class="sd">                                &quot;android_app_only&quot;:false,</span>
+<span class="sd">                                &quot;download_version_number&quot;:null</span>
+<span class="sd">                            },</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;machine_name&quot;:&quot;blossoms_linux&quot;,</span>
+<span class="sd">                                &quot;platform&quot;:&quot;linux&quot;,</span>
+<span class="sd">                                &quot;download_struct&quot;:[</span>
+<span class="sd">                                    {</span>
+<span class="sd">                                        &quot;uploaded_at&quot;:&quot;2019-03-26T21:28:00.117829&quot;,</span>
+<span class="sd">                                        &quot;name&quot;:&quot;Download&quot;,</span>
+<span class="sd">                                        &quot;url&quot;:{</span>
+<span class="sd">                                            &quot;web&quot;:&quot;https://dl.humble.com/...&quot;,</span>
+<span class="sd">                                            &quot;bittorrent&quot;:&quot;https://dl.humble.com/torrents/...&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;human_size&quot;:&quot;679.3 MB&quot;,</span>
+<span class="sd">                                        &quot;file_size&quot;:712316687,</span>
+<span class="sd">                                        &quot;small&quot;:0,</span>
+<span class="sd">                                        &quot;md5&quot;:&quot;c1fd03437e15903792982f1b3e5d3fb3&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                ],</span>
+<span class="sd">                                &quot;options_dict&quot;:{},</span>
+<span class="sd">                                &quot;download_identifier&quot;:null,</span>
+<span class="sd">                                &quot;android_app_only&quot;:false,</span>
+<span class="sd">                                &quot;download_version_number&quot;:null</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ],</span>
+<span class="sd">                        &quot;library_family_name&quot;:&quot;&quot;,</span>
+<span class="sd">                        &quot;payee&quot;:{</span>
+<span class="sd">                            &quot;human_name&quot;:&quot;S Project&quot;,</span>
+<span class="sd">                            &quot;machine_name&quot;:&quot;s_project&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;human_name&quot;:&quot;Blossoms&quot;,</span>
+<span class="sd">                        &quot;custom_download_page_box_css&quot;:null,</span>
+<span class="sd">                        &quot;custom_download_page_box_html&quot;:&quot;&quot;,</span>
+<span class="sd">                        &quot;icon&quot;:&quot;https://hb.imgix.net/123.png?...&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                ],</span>
+<span class="sd">                &quot;total_choices&quot;:0,</span>
+<span class="sd">                &quot;tpkd_dict&quot;:{</span>
+<span class="sd">                    &quot;all_tpks&quot;:[</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;machine_name&quot;:&quot;blossoms_bundle_steam&quot;,</span>
+<span class="sd">                            &quot;gamekey&quot;:&quot;...&quot;,</span>
+<span class="sd">                            &quot;exclusive_countries&quot;:[],</span>
+<span class="sd">                            &quot;num_days_until_expired&quot;:-1,</span>
+<span class="sd">                            &quot;disallowed_countries&quot;:[],</span>
+<span class="sd">                            &quot;show_custom_instructions_in_user_libraries&quot;:false,</span>
+<span class="sd">                            &quot;key_type&quot;:&quot;steam&quot;,</span>
+<span class="sd">                            &quot;visible&quot;:true,</span>
+<span class="sd">                            &quot;sold_out&quot;:false,</span>
+<span class="sd">                            &quot;instructions_html&quot;:&quot;&lt;a href=&#39;https://support.humblebundle.com/hc/articles/204008710-How-To-Redeem-Steam-Keys&#39; target=&#39;_blank&#39;&gt;Steam Instructions&lt;/a&gt;&quot;,</span>
+<span class="sd">                            &quot;display_separately&quot;:false,</span>
+<span class="sd">                            &quot;direct_redeem&quot;:false,</span>
+<span class="sd">                            &quot;key_type_human_name&quot;:&quot;Steam&quot;,</span>
+<span class="sd">                            &quot;steam_app_id&quot;:451760,</span>
+<span class="sd">                            &quot;human_name&quot;:&quot;Highway Blossoms&quot;,</span>
+<span class="sd">                            &quot;preinstruction_text&quot;:&quot;Copy this key into the Steam client, or click Redeem to redeem in-browser.&quot;,</span>
+<span class="sd">                            &quot;auto_expand&quot;:true,</span>
+<span class="sd">                            &quot;is_expired&quot;:false,</span>
+<span class="sd">                            &quot;class&quot;:&quot;steambutton&quot;,</span>
+<span class="sd">                            &quot;keyindex&quot;:0,</span>
+<span class="sd">                            &quot;disclaimer&quot;:&quot;Steam will not provide extra giftable copies of games you already own.&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                    ]</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;choices_remaining&quot;:0,</span>
+<span class="sd">                &quot;currency&quot;:&quot;USD&quot;,</span>
+<span class="sd">                &quot;is_giftee&quot;:false,</span>
+<span class="sd">                &quot;claimed&quot;:true,</span>
+<span class="sd">                &quot;total&quot;:15.0,</span>
+<span class="sd">                &quot;path_ids&quot;:[</span>
+<span class="sd">                    &quot;5921558011118848&quot;</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+    <span class="k">def</span> <span class="nf">get_bundle_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Humble Bundle API</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Chad Furman.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

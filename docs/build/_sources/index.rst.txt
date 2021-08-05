@@ -15,9 +15,13 @@ Welcome to Humble Bundle API's documentation!
 .. autosummary::
    :toctree: generated
 
-   __init__
+.. autoclass:: bundle_service.BundleService
+   :members:
 
+.. autoclass:: network_cache.NetworkCache
+   :members:
 
+.. automodule:: __init__
 
 Indices and tables
 ==================
