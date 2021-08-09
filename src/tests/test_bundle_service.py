@@ -9,7 +9,7 @@ def test_bundle_store_retrieves_all_bundle_ids(cache_fixture):
 
 def test_bundle_store_retrieves_data_by_bundle_id(cache_fixture, example_parsed_order_for_2VnWY5u6C77Pc6yw):
     bundle_id = "2VnWY5u6C77Pc6yw"
-    bundle_data = BundleService(cache=cache_fixture).get_bundle_data_by_bundle_id(bundle_id)
+    bundle_data = BundleService(cache=cache_fixture).get_bundle_by_id(bundle_id)
     assert bundle_data == example_parsed_order_for_2VnWY5u6C77Pc6yw
 
 
@@ -18,3 +18,9 @@ def test_bundle_store_retrieve_book_bundle_ids(cache_fixture, example_parsed_ord
     assert book_bundles == {
         "2VnWY5u6C77Pc6yw": example_parsed_order_for_2VnWY5u6C77Pc6yw
     }
+
+def test_get_all_bundles_with_metadata():
+    """
+    Should return a list with all bundle IDs in our mock as keys in a dict pointing to their respective ajax payloads
+    :return:
+    """

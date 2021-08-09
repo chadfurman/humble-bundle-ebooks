@@ -10,5 +10,6 @@ setup(name='humble-bundle-api',
       install_requires=[
           "pytest",
           "colorama",
+          "graphene>=2.0",
           "sqlitedict"])
 

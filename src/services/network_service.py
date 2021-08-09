@@ -26,7 +26,7 @@ class NetworkLayer(object):
 
 
 # TODO: Convert NetworkCache to use SQLiteDict
-class NetworkCache(object):
+class NetworkService(object):
     _cache = None
 
     def __init__(self):
@@ -83,4 +83,4 @@ class NetworkCache(object):
             log_error('An error occurred trying to save the cache file: ' + str(e))
 
 
-cache = NetworkCache()
+cache = NetworkService()

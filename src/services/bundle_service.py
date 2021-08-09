@@ -1,13 +1,15 @@
-from network_cache import NetworkCache
+from network_service import NetworkService
 
 class BundleService(object):
     """
     This is where the data for your Humble Bundle library can be accessed
+
+    Supports GraphQL style interfacing.  All methods are resolvers in the schema.
     """
-    def __init__(self, cache: NetworkCache) -> None:
+    def __init__(self, cache: NetworkService) -> None:
         self.cache = cache
 
-    def get_all_bundle_ids(self):
+    def get_all_bundle_ids(self) -> list:
         """
         Returns a list of bundle IDs stored in the local `cache` which is an instance of :class:`network_cache.NetworkCache`
 
@@ -18,7 +20,7 @@ class BundleService(object):
         """
         return list(self.cache.get("orders").keys())
 
-    def get_all_bundles_with_metadata(self):
+    def get_all_bundles_with_metadata(self) -> list:
         """
         Returns a dictionary whose keys are bundle IDs and whose values are also dictionaries.
 
@@ -268,6 +270,37 @@ class BundleService(object):
             }
         :return:
         """
+        pass
 
-    def get_bundle_by_id(self):
+
+    def get_bundle_by_id(self, bundle_id: str):
+        pass
+
+
+    def search_bundles(self, search_params):
+        """
+        Quite possibly the most useful method.
+        All search params that take a string support fuzzy matching with Levenshtein Distance.
+        All search params that take an enum support lists with comma-separated values
+
+        Search params:
+        * product name
+        * operating system (game / software only)
+            * macintosh
+            * windows
+            * linux
+        * format (ebook only)
+            * epub
+            * pdf
+            * mobi
+            * other
+        * type
+            * game
+            * ebook
+            * software
+            * other
+
+        :param search_options:
+        :return: list of matching Bundles
+        """
         pass
