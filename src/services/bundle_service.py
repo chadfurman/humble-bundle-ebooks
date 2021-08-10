@@ -1,4 +1,5 @@
 from network_service import NetworkService
+from schema.schema import schema
 
 class BundleService(object):
     """
@@ -6,8 +7,6 @@ class BundleService(object):
 
     Supports GraphQL style interfacing.  All methods are resolvers in the schema.
     """
-    def __init__(self, cache: NetworkService) -> None:
-        self.cache = cache
 
     def get_all_bundle_ids(self) -> list:
         """
@@ -18,7 +17,7 @@ class BundleService(object):
         :return: List of bundle IDs
         :rtype: list
         """
-        return list(self.cache.get("orders").keys())
+        return schema.execute('{ getBundles { id }}').data['getBundles']
 
     def get_all_bundles_with_metadata(self) -> list:
         """
