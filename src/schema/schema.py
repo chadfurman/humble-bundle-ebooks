@@ -1,7 +1,8 @@
-from graphene import ObjectType, String, Schema
+from types.bundle import BundleQuery
+from graphene import String, Schema
 
 
-class Query(ObjectType):
+class Query(BundleQuery):
     """
     Query fields (i.e. methods on this class) are top-level fields in the GraphQL schema
     which are designed to return data.  Queries do not alter state.

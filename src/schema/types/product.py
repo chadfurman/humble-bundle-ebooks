@@ -1,0 +1,1 @@
+{"category": "bundle", "machine_name": "2danimation_softwarebundle", "empty_tpkds": {}, "post_purchase_text": "", "human_name": "Humble Software Bundle: 2D Animation", "partial_gift_enabled": true}
