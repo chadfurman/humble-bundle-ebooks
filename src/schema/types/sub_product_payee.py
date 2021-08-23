@@ -1,20 +1,5 @@
-{
-    "human_name":"Sekai Project",
-    "machine_name":"sekaiproject"
-},
-"payee": {
-    "human_name": "Sekai Project",
-    "machine_name": "sekaiproject"
-},
-"payee": {
-    "human_name": "Sekai Project",
-    "machine_name": "sekaiproject"
-},
-"payee": {
-    "human_name": "Christine Love",
-    "machine_name": "christinelove"
-},
-"payee": {
-    "human_name": "Sekai Project",
-    "machine_name": "sekaiproject"
-},
+from graphene import ObjectType, String
+
+class SubProductPayee(ObjectType):
+    human_name = String(description="The human readable name of the payee, for example 'Super Project'")
+    machine_name = String(description="The machine readable name of the payee, for example 'superproject'")
