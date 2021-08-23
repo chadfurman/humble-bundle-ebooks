@@ -9,5 +9,3 @@ This is a set of classes for interacting with humblebundle.com bundles in variou
 * The CredentialService is responsible for acquiring, storing, and providing your credentials to the NetworkService
 * The BundleService is responsible for providing a simple API to parse the raw data from the NetworkService and provide a simple way of interacting with this data
 """
-
-from bundle_service import *

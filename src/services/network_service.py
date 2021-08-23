@@ -1,11 +1,15 @@
 import os
-import pickle
+import requests
+import json
+from bs4 import BeautifulSoup
 from utils.logger import log_error
 from sqlitedict import SqliteDict
 
 CACHE_FILENAME = os.path.join(os.path.dirname(__file__), 'cache')
 LIBRARY_PAGE_URL = 'https://humblebundle.com/home/library'
 ORDER_ENDPOINT_URL = 'https://humblebundle.com/api/v1/order/%s'
+SESSION_KEY = '' # pull this from the browser console
+CSRF_COOKIE = '' # pull this from the browser console
 
 
 class NetworkLayer(object):
@@ -30,7 +34,8 @@ class NetworkService(object):
     _cache = None
 
     def __init__(self):
-        self.load_cache()
+#        self.load_cache()
+        pass
 
     def refresh_cache(self) -> None:
         '''
@@ -42,9 +47,22 @@ class NetworkService(object):
 
         :return: None
         '''
-        # NetworkLayer.get_objects
-        # write_cache
-        pass
+        #s = requests.session()
+        #s.cookies.set('_simpleauth_sess', SESSION_KEY, domain='humblebundle.com')
+        #s.cookies.set('csrf_cookie', CSRF_COOKIE, domain='humblebundle.com')
+        #response = s.get('https://www.humblebundle.com/home/library?hmb_source=navbar')
+       # content = open('./response.content.out', 'w+')
+        content = open('./response.content.out', 'r+')
+        #content.write(response.content.decode('utf-8'))
+        html = content.read()
+        soup = BeautifulSoup(html, 'html.parser')
+        scripts = soup.find_all('script')
+        print('trying...')
+        for script in scripts:
+            if 'gamekeys' in str(script):
+                print(json.loads(script.contents[0])['gamekeys'])
+
+        print("Done")
 
     def get(self, key: str) -> any:
         '''

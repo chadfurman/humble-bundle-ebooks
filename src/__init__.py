@@ -9,5 +9,3 @@ This is the data cache that Humble Bundle loads client-side when you navigate yo
 The goal of this library is to facilitate other tools to be built around the Humble Bundle store, since the web-based index can be limiting.
 Specifically, I built this library with the intention of making a Calibre plugin for fetching ebooks remotely.
 """
-
-from bundle_service import *
