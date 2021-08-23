@@ -8,8 +8,8 @@ from sqlitedict import SqliteDict
 CACHE_FILENAME = os.path.join(os.path.dirname(__file__), 'cache')
 LIBRARY_PAGE_URL = 'https://humblebundle.com/home/library'
 ORDER_ENDPOINT_URL = 'https://humblebundle.com/api/v1/order/%s'
-SESSION_KEY = '' # pull this from the browser console
-CSRF_COOKIE = '' # pull this from the browser console
+#SESSION_KEY = '' # pull this from the browser console
+#CSRF_COOKIE = '' # pull this from the browser console
 
 
 class NetworkLayer(object):
@@ -47,11 +47,11 @@ class NetworkService(object):
 
         :return: None
         '''
-        #s = requests.session()
-        #s.cookies.set('_simpleauth_sess', SESSION_KEY, domain='humblebundle.com')
-        #s.cookies.set('csrf_cookie', CSRF_COOKIE, domain='humblebundle.com')
+        s = requests.session()
+        s.cookies.set('_simpleauth_sess', SESSION_KEY, domain='humblebundle.com')
+        s.cookies.set('csrf_cookie', CSRF_COOKIE, domain='humblebundle.com')
         #response = s.get('https://www.humblebundle.com/home/library?hmb_source=navbar')
-       # content = open('./response.content.out', 'w+')
+        #content = open('./response.content.out', 'w+')
         content = open('./response.content.out', 'r+')
         #content.write(response.content.decode('utf-8'))
         html = content.read()
@@ -60,9 +60,38 @@ class NetworkService(object):
         print('trying...')
         for script in scripts:
             if 'gamekeys' in str(script):
-                print(json.loads(script.contents[0])['gamekeys'])
+                #print(script.contents[0])
+                gamekeys = json.loads(script.contents[0])['gamekeys']
+                key = gamekeys[0]
+                #for key in gamekeys:
+                print('requesting {}'.format(key))
+                # write
+                #order_response_content = open('./order_response_content.out', 'w+')
+                #order_response = s.get("https://www.humblebundle.com/api/v1/order/{}?all_tpkds=true".format(key))
+                #order_response_json = order_response.json()
+                #print('writing ' + str(order_response_json))
+                #json.dump(order_response_json, order_response_content)
+                # read
+                order_response_content = open('./order_response_content.out', 'r')
+                order_response_json: dict = json.load(order_response_content)
+                self.save_order(order_response_json)
+                print(str(order_response_json))
+
 
         print("Done")
+
+    def save_order(self, order_response_json: dict) -> bool:
+        """Take in a dictionary representation of an order and write it to the db
+
+        Args:
+            order_response_json (dict): The dictionary representation of the order from a network request.
+        Returns:
+            (bool): True if the order was written, false if there was an error parsing the order.
+        """
+        try:
+            pass
+        except:
+            pass
 
     def get(self, key: str) -> any:
         '''
