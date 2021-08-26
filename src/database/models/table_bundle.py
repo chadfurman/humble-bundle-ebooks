@@ -3,7 +3,7 @@ from sqlalchemy import Table, Column, Float, String, Date, Integer, Boolean
 bundle_table = Table(
     "bundle",
     metadata_obj,
-    Column("id", Integer, primary_key=True),
+    Column("id", Integer, primary_key=True, description="The unique auto-incrementing ID of this bundle in our local database -- not used by Humble Bundle"),
     Column("amount_spent", Float, description="The amount of currency that the user has spent on this bundle, represented as a float e.x. 25.0"),
     # TODO: foreign key
     Column("product ",  Field, Product, description="The metadata associated with this Bundle which HumbleBundle calls a Product"),
