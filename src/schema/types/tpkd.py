@@ -1,5 +1,6 @@
 from graphene import List, String, Int, Boolean, ObjectType
 
+@dataclass
 class Tpkd(ObjectType):
     """A Humble Bundle TPKD, which is like a product key (TODO: What's a TPKD, exactly?)"""
     exclusive_countries=List(String(), description="List of countries where this product is available. TODO: What is the format of a country?")

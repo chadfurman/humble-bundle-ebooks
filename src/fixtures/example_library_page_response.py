@@ -119,13 +119,13 @@ var {
 <style></style>
 
 <script>
-  window.models = window.models || {};
+  window.dto = window.dto || {};
 
 
-window.models.user_json = {"maxRewardAmount": 10, "needs_to_opt_in": false, "wishlist": [], "has_epic_account_id": false, "gog_account_id": null, "battlenet_tag": null, "remind_me_products": [], "has_steam_link": true, "has_battlenet_link": false, "has_admin_access": false, "terms_url": "", "payment_credentials": [], "hasSharedDiscount": null, "rewardsDiscountAmount": 0, "origin_username": null, "selectedCountry": "US", "selectedLatitude": "42.107038", "selectedCity": "west springfield", "created": "2017-02-18T23:43:24.120100", "rewardsCharityAmount": 10, "hasIncreasedRewards": false, "logout_url": "/logout?goto\u003d/", "selectedLongitude": "-72.620368", "rewardsWalletAmount": 0, "is_logged_in": true, "gog_username": null, "origin_is_linked": false, "email": "chad@chadfurman.com", "selectedRegion": "MA"};
+window.dto.user_json = {"maxRewardAmount": 10, "needs_to_opt_in": false, "wishlist": [], "has_epic_account_id": false, "gog_account_id": null, "battlenet_tag": null, "remind_me_products": [], "has_steam_link": true, "has_battlenet_link": false, "has_admin_access": false, "terms_url": "", "payment_credentials": [], "hasSharedDiscount": null, "rewardsDiscountAmount": 0, "origin_username": null, "selectedCountry": "US", "selectedLatitude": "42.107038", "selectedCity": "west springfield", "created": "2017-02-18T23:43:24.120100", "rewardsCharityAmount": 10, "hasIncreasedRewards": false, "logout_url": "/logout?goto\u003d/", "selectedLongitude": "-72.620368", "rewardsWalletAmount": 0, "is_logged_in": true, "gog_username": null, "origin_is_linked": false, "email": "chad@chadfurman.com", "selectedRegion": "MA"};
 
-window.models.userSubscriptionState = {"failedBillingMonths": 0, "creditsRemaining": 0, "contentEndDateAfterBillDate": "2021-06-01T17:00:00", "isPaused": false, "monthlyNewestOwnedContentMachineName": null, "willReceiveFutureMonths": false, "monthlyPurchasedAnyContent": false, "newestOwnedTier": null, "nextBilledPlan": "", "lastSkippedContentMachineName": null, "unpauseDt": "2021-06-01T17:00:00", "wasPaused": false, "billDate": "2021-06-29T17:00:00", "canResubscribe": false, "monthlyNewestOwnedContentEnd": null, "currentlySkippingContentMachineName": null, "monthlyOwnsAnyContent": false, "perksStatus": "inactive", "canBeConvertedFromGiftSubToPayingSub": false, "monthlyOwnsActiveContent": false, "monthlyNewestOwnedContentGamekey": null};
-window.models.request = {
+window.dto.userSubscriptionState = {"failedBillingMonths": 0, "creditsRemaining": 0, "contentEndDateAfterBillDate": "2021-06-01T17:00:00", "isPaused": false, "monthlyNewestOwnedContentMachineName": null, "willReceiveFutureMonths": false, "monthlyPurchasedAnyContent": false, "newestOwnedTier": null, "nextBilledPlan": "", "lastSkippedContentMachineName": null, "unpauseDt": "2021-06-01T17:00:00", "wasPaused": false, "billDate": "2021-06-29T17:00:00", "canResubscribe": false, "monthlyNewestOwnedContentEnd": null, "currentlySkippingContentMachineName": null, "monthlyOwnsAnyContent": false, "perksStatus": "inactive", "canBeConvertedFromGiftSubToPayingSub": false, "monthlyOwnsActiveContent": false, "monthlyNewestOwnedContentGamekey": null};
+window.dto.request = {
   country_code: "US",
   captcha_enabled: true,
   vat_rate: 0.0,
@@ -152,7 +152,7 @@ window.models.request = {
 ga('set', 'dimension5', 'Logged In');
 
 // TODO: Clean this up in ENG-22003
-if (window.models.userSubscriptionState.perksStatus === 'active') {
+if (window.dto.userSubscriptionState.perksStatus === 'active') {
   // dimension6 = 'Subscriber State' to differentiate subscribed users vs. not
   ga('set', 'dimension6', 'Subscribed');
 } else {
@@ -217,10 +217,10 @@ _hbga('send', 'pageview', {
 
   // Initialize the heap object with our heap app ID
   heap.load('2199522758');
-  var userJson = window.models.user_json;
-  var subscriptionJson = window.models.userSubscriptionState;
+  var userJson = window.dto.user_json;
+  var subscriptionJson = window.dto.userSubscriptionState;
   var userProperties = $.extend({}, subscriptionJson);
-  userProperties.userCountry = userJson.selectedCountry || window.models.request.country_code;
+  userProperties.userCountry = userJson.selectedCountry || window.dto.request.country_code;
   userProperties.locale = 'en';
   var userID = 'ahFzfmhyLWh1bWJsZWJ1bmRsZXIRCxIEVXNlchiAgMj7pZDLCgw';
   if (userID) {

@@ -10,7 +10,10 @@ setup(name='humble-bundle-api',
       install_requires=[
           "pytest",
           "colorama",
+          "inflect",
+          "attr",
           "sqlalchemy",
+          "black",
           "graphene>=2.0",
           "sqlitedict"])
 
