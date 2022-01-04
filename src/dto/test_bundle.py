@@ -1,5 +1,5 @@
 import pytest
-import bundle
+from . import bundle
 from attr import asdict
 
 
