@@ -1,20 +1,8 @@
 import pytest
 
-@pytest.fixture
-def example_library_page_response():
-    return '''HTTP/2 200 OK
-Content-Type: text/html; charset=utf-8
-Cache-Control: no-cache
-Set-Cookie: hmb_source=navbar; Domain=.humblebundle.com; Max-Age=86400; Path=/; expires=Mon, 31-May-2021 00:35:40 GMT
-Set-Cookie: _simpleauth_sess=eyJ1c2VyX2lkIjo1OTU5OTEyOTY5NjAxMDI0LCJpZCI6InRWZE9HVzE4RWMiLCJhdXRoX3RpbWUiOjE2MjIzMzQ4NTd9|1622334940|df67ad2f299afbcb0a51a378113772f75a66ecaf; Domain=.humblebundle.com; Max-Age=15552000; Path=/; expires=Fri, 26-Nov-2021 00:35:40 GMT; secure; HttpOnly
-X-Cloud-Trace-Context: 550695d23dfe653efbebd8420cf5dccf
-Vary: Accept-Encoding
-Date: Sun, 30 May 2021 00:35:40 GMT
-Server: Google Frontend
-Content-Length: 40228
-Expires: Sun, 30 May 2021 00:35:40 GMT
 
-<!doctype html>
+def example_library_page_response():
+    return '''<!doctype html>
 
 <html lang="en" class="">
   <head>

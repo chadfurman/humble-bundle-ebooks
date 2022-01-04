@@ -1,19 +1,8 @@
 import pytest
 
-@pytest.fixture
-def example_order_response_for_order_2cut2AGkahN7WqBK():
-    return '''HTTP/2 200 OK
-Cache-Control: no-cache
-Content-Type: application/json; charset=utf-8
-Set-Cookie: _simpleauth_sess=eyJ1c2VyX2lkIjo1OTU5OTEyOTY5NjAxMDI0LCJpZCI6InRWZE9HVzE4RWMiLCJhdXRoX3RpbWUiOjE2MjIzMzQ4NTd9|1622334943|7d2106a858df0ceff982070f8ec9283efdabab5e; Domain=.humblebundle.com; Max-Age=15552000; Path=/; expires=Fri, 26-Nov-2021 00:35:43 GMT; secure; HttpOnly
-X-Cloud-Trace-Context: 202af53d2106c7a01d9694efd4592435
-Vary: Accept-Encoding
-Date: Sun, 30 May 2021 00:35:43 GMT
-Server: Google Frontend
-Content-Length: 22769
-Expires: Sun, 30 May 2021 00:35:43 GMT
 
-{
+def example_order_response_for_order_2cut2AGkahN7WqBK():
+    return '''{
 "amount_spent":15.0,
 "product":{
 "category":"bundle",

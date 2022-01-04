@@ -1,13 +1,13 @@
 import os
-import requests
 import json
 from bs4 import BeautifulSoup
 from utils.logger import log_error
 from sqlitedict import SqliteDict
+from typing import List
+from dto.raw_order import RawOrderDTO
 
-CACHE_FILENAME = os.path.join(os.path.dirname(__file__), 'cache')
-LIBRARY_PAGE_URL = 'https://humblebundle.com/home/library'
-ORDER_ENDPOINT_URL = 'https://humblebundle.com/api/v1/order/%s'
+LIBRARY_PAGE_URL = 'https://www.humblebundle.com/home/library'
+ORDER_ENDPOINT_URL = 'https://www.humblebundle.com/api/v1/order/{}?all_tpkds=true'
 #SESSION_KEY = '' # pull this from the browser console
 #CSRF_COOKIE = '' # pull this from the browser console
 
@@ -31,13 +31,14 @@ class NetworkLayer(object):
 
 # TODO: Convert NetworkCache to use SQLiteDict
 class NetworkService(object):
-    _cache = None
+    requests = None
 
-    def __init__(self):
-#        self.load_cache()
-        pass
+    def __init__(self, requests=None, library_page_url=LIBRARY_PAGE_URL, order_endpoint_url=ORDER_ENDPOINT_URL):
+        self.requests = requests
+        self.library_page_url = library_page_url
+        self.order_endpoint_url = order_endpoint_url
 
-    def refresh_cache(self) -> None:
+    def fetch_raw_orders(self, session_key, csrf_key) -> List[RawOrderDTO]:
         '''
         .. function:: refresh_cache()
 
@@ -47,87 +48,43 @@ class NetworkService(object):
 
         :return: None
         '''
-        s = requests.session()
-        s.cookies.set('_simpleauth_sess', SESSION_KEY, domain='humblebundle.com')
-        s.cookies.set('csrf_cookie', CSRF_COOKIE, domain='humblebundle.com')
-        #response = s.get('https://www.humblebundle.com/home/library?hmb_source=navbar')
-        #content = open('./response.content.out', 'w+')
-        content = open('./response.content.out', 'r+')
-        #content.write(response.content.decode('utf-8'))
-        html = content.read()
+        raw_orders = []
+        s = self.requests.session()
+        s.cookies.set('_simpleauth_sess', session_key, domain='humblebundle.com')
+        s.cookies.set('csrf_cookie', csrf_key, domain='humblebundle.com')
+        response = s.get(self.library_page_url)
+        html = response.text
         soup = BeautifulSoup(html, 'html.parser')
         scripts = soup.find_all('script')
-        print('trying...')
         for script in scripts:
             if 'gamekeys' in str(script):
                 #print(script.contents[0])
                 gamekeys = json.loads(script.contents[0])['gamekeys']
-                key = gamekeys[0]
-                #for key in gamekeys:
-                print('requesting {}'.format(key))
-                # write
-                #order_response_content = open('./order_response_content.out', 'w+')
-                #order_response = s.get("https://www.humblebundle.com/api/v1/order/{}?all_tpkds=true".format(key))
-                #order_response_json = order_response.json()
-                #print('writing ' + str(order_response_json))
-                #json.dump(order_response_json, order_response_content)
-                # read
-                order_response_content = open('./order_response_content.out', 'r')
-                order_response_json: dict = json.load(order_response_content)
-                self.save_order(order_response_json)
-                print(str(order_response_json))
+                for gamekey in gamekeys:
+                    # write
+                    order_response = s.get(self.order_endpoint_url.format(gamekey))
+                    raw_orders.append(self.order_response_to_raw_order_dto(order_response))
+        return raw_orders
 
-
-        print("Done")
-
-    def save_order(self, order_response_json: dict) -> bool:
-        """Take in a dictionary representation of an order and write it to the db
-
-        Args:
-            order_response_json (dict): The dictionary representation of the order from a network request.
-        Returns:
-            (bool): True if the order was written, false if there was an error parsing the order.
-        """
-        try:
-            pass
-        except:
-            pass
-
-    def get(self, key: str) -> any:
-        '''
-        .. function:: get(key)
-
-        Returns the value from the network cache corresponding to the provided ``key``
-
-        .. note::
-            Does not refresh the cache
-
-        .. seealso::
-            :mod: NetworkCache.refresh_cache()
-
-        :param key: The key to pull out of the network cache
-        :type key: str
-        :returns: The deserialized value stored at the key in the cache
-        '''
-        return self._cache[key]
-
-    def load_cache(self):
-        '''
-        ..
-        :return:
-        '''
-        try:
-            self._cache = SqliteDict(CACHE_FILENAME)
-        except FileNotFoundError:
-            pass
-        except (OSError, IOError) as e:
-            log_error('An error occurred trying to load the cache file: ' + str(e))
-
-    def save_cache(self):
-        try:
-            self._cache.commit()
-        except (OSError, IOError) as e:
-            log_error('An error occurred trying to save the cache file: ' + str(e))
-
+    def order_response_to_raw_order_dto(self, order_response):
+        order = order_response.json()
+        return RawOrderDTO(
+            amount_spent=order['amount_spent'],
+            product=order['product'],
+            gamekey=order['gamekey'],
+            uid=order['uid'],
+            all_coupon_data=order['all_coupon_data'],
+            created=order['created'],
+            missed_credit=order['missed_credit'],
+            subproducts=order['subproducts'],
+            total_choices=order['total_choices'],
+            tpkd_dict=order['tpkd_dict'],
+            choices_remaining=order['choices_remaining'],
+            currency=order['currency'],
+            is_giftee=order['is_giftee'],
+            claimed=order['claimed'],
+            total=order['total'],
+            path_ids=order['path_ids'],
+        )
 
 cache = NetworkService()

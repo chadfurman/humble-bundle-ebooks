@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Float, String, Date, Integer, Boolean
 from sqlalchemy.orm import relationship
 from .base import Base
-from dto.bundle import Bundle as BundleDTO
+from dto.bundle import BundleDTO as BundleDTO
 
 BUNDLE_ID_DESCRIPTION = "The unique auto-incrementing ID of this bundle in our local database -- not used by Humble Bundle"
 BUNDLE_NAME_DESCRIPTION = "A human-readable name for this bundle"

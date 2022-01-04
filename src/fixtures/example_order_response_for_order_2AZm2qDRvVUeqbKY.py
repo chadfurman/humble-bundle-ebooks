@@ -1,19 +1,8 @@
 import pytest
 
-@pytest.fixture
-def example_order_response_for_order_2AZm2qDRvVUeqbKY():
-    return '''HTTP/2 200 OK
-Cache-Control: no-cache
-Content-Type: application/json; charset=utf-8
-Set-Cookie: _simpleauth_sess=eyJ1c2VyX2lkIjo1OTU5OTEyOTY5NjAxMDI0LCJpZCI6InRWZE9HVzE4RWMiLCJhdXRoX3RpbWUiOjE2MjIzMzQ4NTd9|1622334942|2e549e57e08c397b4460b2eddbd729cf6cc15327; Domain=.humblebundle.com; Max-Age=15552000; Path=/; expires=Fri, 26-Nov-2021 00:35:42 GMT; secure; HttpOnly
-X-Cloud-Trace-Context: dedb169bbd9eb96cb0536ced7027dbcd
-Vary: Accept-Encoding
-Date: Sun, 30 May 2021 00:35:42 GMT
-Server: Google Frontend
-Content-Length: 4119
-Expires: Sun, 30 May 2021 00:35:42 GMT
 
-{
+def example_order_response_for_order_2AZm2qDRvVUeqbKY():
+    return '''{
 "amount_spent":25.0,
 "product":{
 "category":"bundle",
@@ -61,7 +50,7 @@ Expires: Sun, 30 May 2021 00:35:42 GMT
 "exclusive_countries":[],
 "machine_name":"2danimation_softwarebundle_bt1_reallusion",
 "gamekey":"2AZm2qDRvVUeqbKY",
-"custom_instructions_html":"<div class=\"instructions_html overgrowthspf_instruct\" style=\"text-align: center;\">\r\n\t<center>\r\n\t\t<p style=\"font-size: 15px\">\r\n\t\t\t <a href=\"https://support.humblebundle.com/hc/en-us/articles/360038790114\" target=\"_blank\">Redemption Instructions</a>.\r\n\t\t</p>\r\n\t</center>\r\n</div>",
+"custom_instructions_html":"<div class=\\"instructions_html overgrowthspf_instruct\\" style=\\"text-align: center;\\">\\r\\n\\t<center>\\r\\n\\t\\t<p style=\\"font-size: 15px\\">\\r\\n\\t\\t\\t <a href=\\"https://support.humblebundle.com/hc/en-us/articles/360038790114\\" target=\\"_blank\\">Redemption Instructions</a>.\\r\\n\\t\\t</p>\\r\\n\\t</center>\\r\\n</div>",
 "disallowed_countries":[],
 "show_custom_instructions_in_user_libraries":false,
 "key_type":"generic",
@@ -81,7 +70,7 @@ Expires: Sun, 30 May 2021 00:35:42 GMT
 "exclusive_countries":[],
 "machine_name":"2danimation_soft_bta_reallusion",
 "gamekey":"2AZm2qDRvVUeqbKY",
-"custom_instructions_html":"<div class=\"instructions_html overgrowthspf_instruct\" style=\"text-align: center;\">\r\n\t<center>\r\n\t\t<p style=\"font-size: 15px\">\r\n\t\t\t <a href=\"https://support.humblebundle.com/hc/en-us/articles/360038790114\" target=\"_blank\">Redemption Instructions</a>.\r\n\t\t</p>\r\n\t</center>\r\n</div>",
+"custom_instructions_html":"<div class=\\"instructions_html overgrowthspf_instruct\\" style=\\"text-align: center;\\">\\r\\n\\t<center>\\r\\n\\t\\t<p style=\\"font-size: 15px\\">\\r\\n\\t\\t\\t <a href=\\"https://support.humblebundle.com/hc/en-us/articles/360038790114\\" target=\\"_blank\\">Redemption Instructions</a>.\\r\\n\\t\\t</p>\\r\\n\\t</center>\\r\\n</div>",
 "disallowed_countries":[],
 "show_custom_instructions_in_user_libraries":false,
 "key_type":"generic",
@@ -101,7 +90,7 @@ Expires: Sun, 30 May 2021 00:35:42 GMT
 "exclusive_countries":[],
 "machine_name":"2danimation_soft_bt25_reallusion",
 "gamekey":"2AZm2qDRvVUeqbKY",
-"custom_instructions_html":"<div class=\"instructions_html overgrowthspf_instruct\" style=\"text-align: center;\">\r\n\t<center>\r\n\t\t<p style=\"font-size: 15px\">\r\n\t\t\t <a href=\"https://support.humblebundle.com/hc/en-us/articles/360038790114\" target=\"_blank\">Redemption Instructions</a>.\r\n\t\t</p>\r\n\t</center>\r\n</div>",
+"custom_instructions_html":"<div class=\\"instructions_html overgrowthspf_instruct\\" style=\\"text-align: center;\\">\\r\\n\\t<center>\\r\\n\\t\\t<p style=\\"font-size: 15px\\">\\r\\n\\t\\t\\t <a href=\\"https://support.humblebundle.com/hc/en-us/articles/360038790114\\" target=\\"_blank\\">Redemption Instructions</a>.\\r\\n\\t\\t</p>\\r\\n\\t</center>\\r\\n</div>",
 "disallowed_countries":[],
 "show_custom_instructions_in_user_libraries":false,
 "key_type":"generic",

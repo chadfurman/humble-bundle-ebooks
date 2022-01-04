@@ -1,8 +1,8 @@
-from dto.bundle import Bundle
+from dto.bundle import BundleDTO
 from repositories.bundle import BundleRepository
 from database.db_manager import dal
 from database.models.bundle import Bundle
-from dto.bundle import Bundle as BundleDTO
+from dto.bundle import BundleDTO as BundleDTO
 from datetime import datetime
 import pytest
 
