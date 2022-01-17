@@ -38,3 +38,12 @@ Additional usage, for example as a library and as part of a Calibre plugin, will
 * [ ] Research requirements for a Calibre plugin
 * [ ] Update TODO list with requirements for usage as a library to support a Calibre plugin
 * [ ] Perform auth handshake to get the `csrf_cookie` and `_simpleauth_sess` cookies (currently, these need to be hard-coded)
+
+## Development
+to run the tests, do this:
+```
+PYTHONpATH=$(pwd) pytest
+```
+
+ Note that you must install the testing dependencies which right now install automatically all the time
+
