@@ -1,4 +1,4 @@
-import os
+import time
 import json
 from bs4 import BeautifulSoup
 from utils.logger import log_error
@@ -8,8 +8,7 @@ from dto.raw_order import RawOrderDTO
 
 LIBRARY_PAGE_URL = 'https://www.humblebundle.com/home/library'
 ORDER_ENDPOINT_URL = 'https://www.humblebundle.com/api/v1/order/{}?all_tpkds=true'
-#SESSION_KEY = '' # pull this from the browser console
-#CSRF_COOKIE = '' # pull this from the browser console
+NETWORK_REQUEST_DELAY = .1
 
 
 class NetworkLayer(object):
@@ -38,7 +37,7 @@ class NetworkService(object):
         self.library_page_url = library_page_url
         self.order_endpoint_url = order_endpoint_url
 
-    def fetch_raw_orders(self, session_key, csrf_key) -> List[RawOrderDTO]:
+    def fetch_raw_orders(self, session, csrf, ignore_sleep=False) -> List[RawOrderDTO]:
         '''
         .. function:: refresh_cache()
 
@@ -64,6 +63,8 @@ class NetworkService(object):
                     # write
                     order_response = s.get(self.order_endpoint_url.format(gamekey))
                     raw_orders.append(self.order_response_to_raw_order_dto(order_response))
+                    if not ignore_sleep:
+                        time.sleep(NETWORK_REQUEST_DELAY)
         return raw_orders
 
     def order_response_to_raw_order_dto(self, order_response):
