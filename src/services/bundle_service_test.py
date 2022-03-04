@@ -5,7 +5,7 @@ from services.bundle_service import BundleService
 
 import pytest
 
-from dto.raw_order import RawOrder
+from dto.raw_order import RawOrderDTO
 
 MOCK_AMOUNT_SPENT = 25.0
 MOCK_PRODUCT = {
@@ -139,14 +139,14 @@ def raw_order_factory():
         claimed = MOCK_CLAIMED,
         total = MOCK_TOTAL,
         path_ids = None
-    ) -> RawOrder :
+    ) -> RawOrderDTO :
         product = product or MOCK_PRODUCT
         all_coupon_data = all_coupon_data or MOCK_ALL_COUPON_DATA
         subproducts = subproducts or MOCK_SUBPRODUCTS
         tpkd_dict = tpkd_dict or MOCK_TPKD_DICT
         path_ids = path_ids or MOCK_PATH_IDS
 
-        return RawOrder(
+        return RawOrderDTO(
             amount_spent=amount_spent,
             product=product,
             gamekey=gamekey,
@@ -174,19 +174,19 @@ class MockNetworkService(object):
         for x in raw_order_response:
             self.raw_order_response.append(x)
 
-    def fetch_raw_orders(self, username, password) -> List[RawOrder]:
-        self.calls.append(('fetch_library', username, password))
-        return [RawOrder(), RawOrder()]
+    def fetch_raw_orders(self, session, csrf) -> List[RawOrderDTO]:
+        self.calls.append(('fetch_library', session, csrf))
+        return [RawOrderDTO(), RawOrderDTO()]
 
 
 def test_retrieve_remote_bundles_with_credentials(raw_order_factory):
-    mock_username = "MOCK_USER"
-    mock_password = "MOCK_PASSWORD"
+    mock_session_key = "MOCK_USER"
+    mock_csrf_key = "MOCK_PASSWORD"
     raw_order_1 = raw_order_factory()
     mock_network_service = Mock()
-    mock_network_service.fetch_raw_orders = lambda username, password: [raw_order_1] if username == mock_username and password == mock_password else None
+    mock_network_service.fetch_raw_orders = lambda session, csrf: [raw_order_1] if session == mock_session_key and csrf == mock_csrf_key else None
     mock_bundle_repository = create_autospec(BundleRepository)
     mock_bundle_repository.create = Mock()
     service = BundleService(network_service=mock_network_service, bundle_repository=mock_bundle_repository)
-    service.retrieve_remote_bundles_with_credentials(username=mock_username, password=mock_password)
+    service.retrieve_remote_bundles_with_credentials(session=mock_session_key, csrf=mock_csrf_key)
     assert mock_bundle_repository.create.call_args_list[0].args[0].bundle_name == raw_order_1.product['human_name']

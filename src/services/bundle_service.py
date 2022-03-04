@@ -23,8 +23,8 @@ class BundleService(object):
             path_ids=raw_order.path_ids
         )
 
-    def retrieve_remote_bundles_with_credentials(self, username: str, password: str) -> None:
-        raw_orders: List[RawOrderDTO] = self.network_service.fetch_raw_orders(username=username, password=password)
+    def retrieve_remote_bundles_with_credentials(self, session: str, csrf: str) -> None:
+        raw_orders: List[RawOrderDTO] = self.network_service.fetch_raw_orders(session=session, csrf=csrf)
         [self.bundle_repository.create(self._convert_raw_order_to_bundle(x)) for x in raw_orders]
 
 
