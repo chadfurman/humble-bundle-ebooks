@@ -1,8 +1,8 @@
 import time
 import json
 from bs4 import BeautifulSoup
-from utils.logger import log_error
-from sqlitedict import SqliteDict
+from requests import Response
+
 from typing import List
 from dto.raw_order import RawOrderDTO
 
@@ -49,8 +49,8 @@ class NetworkService(object):
         '''
         raw_orders = []
         s = self.requests.session()
-        s.cookies.set('_simpleauth_sess', session_key, domain='humblebundle.com')
-        s.cookies.set('csrf_cookie', csrf_key, domain='humblebundle.com')
+        s.cookies.set('_simpleauth_sess', session, domain='humblebundle.com')
+        s.cookies.set('csrf_cookie', csrf, domain='humblebundle.com')
         response = s.get(self.library_page_url)
         html = response.text
         soup = BeautifulSoup(html, 'html.parser')
@@ -67,7 +67,7 @@ class NetworkService(object):
                         time.sleep(NETWORK_REQUEST_DELAY)
         return raw_orders
 
-    def order_response_to_raw_order_dto(self, order_response):
+    def order_response_to_raw_order_dto(self, order_response: Response) -> RawOrderDTO:
         order = order_response.json()
         return RawOrderDTO(
             amount_spent=order['amount_spent'],
@@ -87,5 +87,6 @@ class NetworkService(object):
             total=order['total'],
             path_ids=order['path_ids'],
         )
+
 
 cache = NetworkService()

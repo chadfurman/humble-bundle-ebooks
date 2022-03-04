@@ -50,7 +50,7 @@ def test_fetch_raw_orders():
     mock_session_key = "mock_session_key"
     mock_csrf_key = "mock_csrf_key"
     network_service = NetworkService(requests=mock_requests)
-    raw_orders = network_service.fetch_raw_orders(session_key=mock_session_key, csrf_key=mock_csrf_key)
+    raw_orders = network_service.fetch_raw_orders(session=mock_session_key, csrf=mock_csrf_key)
     mock_requests.session.cookies.set.assert_any_call('_simpleauth_sess', mock_session_key, domain='humblebundle.com')
     mock_requests.session.cookies.set.assert_any_call('csrf_cookie', mock_csrf_key, domain='humblebundle.com')
     assert LIBRARY_PAGE_URL in mock_requests.session.get_calls
