@@ -54,11 +54,15 @@ class NetworkService(object):
         response = s.get(self.library_page_url)
         html = response.text
         soup = BeautifulSoup(html, 'html.parser')
-        scripts = soup.find_all('script')
+        scripts = soup.find_all('script', id='user-home-json-data')
         for script in scripts:
+
             if 'gamekeys' in str(script):
-                #print(script.contents[0])
-                gamekeys = json.loads(script.contents[0])['gamekeys']
+                try:
+                    gamekeys = json.loads(script.contents[0])['gamekeys']
+                except:
+                    continue
+                print('found {} gamekeys'.format(len(gamekeys)))
                 for gamekey in gamekeys:
                     # write
                     order_response = s.get(self.order_endpoint_url.format(gamekey))
