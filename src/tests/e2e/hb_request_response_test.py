@@ -4,7 +4,7 @@ import requests
 import json
 from services.network_service import NetworkService
 
-@pytest.mark.skipif(reason="'E2E' not in os.environ")
+@pytest.mark.skipif(condition=(not os.environ.get('E2E', False)), reason="'E2E' not in os.environ")
 def test_hb_request_response_via_network_service():
     try:
         session = os.environ['SESSION']
