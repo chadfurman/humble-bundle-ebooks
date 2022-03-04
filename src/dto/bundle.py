@@ -1,5 +1,6 @@
 from attr import define, field
 
+
 @define
 class BundleDTO:
     # TODO: foreign key, list
