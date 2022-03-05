@@ -1,7 +1,6 @@
 import pytest
 
 
-@pytest.fixture()
 def example_parsed_order_for_2VnWY5u6C77Pc6yw():
     return {
         "amount_spent": 15.0,

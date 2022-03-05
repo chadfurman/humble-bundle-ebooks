@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from database.db_manager import dal
 from database.models.bundle import Bundle as BundleModel
-from dto.bundle import Bundle as BundleDTO
+from dto.bundle import BundleDTO as BundleDTO
 from typing import Optional
 
 

@@ -42,8 +42,15 @@ Additional usage, for example as a library and as part of a Calibre plugin, will
 ## Development
 to run the tests, do this:
 ```
-PYTHONpATH=$(pwd) pytest
+PYTHONPATH=$(pwd) pytest
+```
+
+to include the e2e test suite (note, this hits the Humble Bundle API with your actual session token), do this:
+```
+E2E=1 SESSION="your-session-key" CSRF="your-csrf-key" PYTHONPATH=$(pwd) pytest
 ```
 
  Note that you must install the testing dependencies which right now install automatically all the time
+
+ TODO: Move this to a "make test" file with an optional prompt for e2e credentials using https://term.ink
 

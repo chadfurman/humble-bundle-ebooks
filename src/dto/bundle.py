@@ -1,15 +1,16 @@
 from attr import define, field
 
+
 @define
-class Bundle:
+class BundleDTO:
     # TODO: foreign key, list
     # product = relationship(Product, description="The metadata associated with this Bundle which HumbleBundle calls a Product")
     # all_coupon_data = relationship(CouponType, description="A list of coupons which came with this bundle.")
     # sub_products = relationship(SubProduct, description="A list of sub-products.  These are like downloadable games, books, etc.")  # TODO: what is a sub product and how does it differ from a product?
     # tpkd_dict = relationship(TpkdDict, description="TODO: What a tpkd and what is a tpkd dict?")  # TODO: Properly describe what a TPKD is and what this dict is for
 
-    bundle_id = field()  # Integer, primary_key=True, description="The unique auto-incrementing ID of this bundle in our local database -- not used by Humble Bundle")
     bundle_name = field()  # String, description="A human-readable name for this bundle")
+    bundle_id = field(default=None)  # Integer, primary_key=True, description="The unique auto-incrementing ID of this bundle in our local database -- not used by Humble Bundle")
     amount_spent = field(default=None)  # Float, description="The amount of currency that the user has spent on this bundle, represented as a float e.x. 25.0")
     gamekey = field(default=None)  # String, description="A gamekey, if any, for this bundle.  Not all bundles may have a gamekey.  ex: '2AZm2qDRsVUeqbKY'")
     uid = field(default=None)  # String, description="A unique identifier for this Bundle used for several purposes in the HumbleBundle API.  Ex: 'X9GHPP9ABKS28'")
