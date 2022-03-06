@@ -2,12 +2,17 @@ from dto.bundle import BundleDTO
 from dto.raw_order import RawOrderDTO
 from typing import List
 
+from utils.logger import log_debug
+
+
 class BundleService(object):
     def __init__(self, network_service, bundle_repository):
         self.network_service = network_service
         self.bundle_repository = bundle_repository
+        log_debug('Bundle Service', 'Init')
 
     def _convert_raw_order_to_bundle(self, raw_order: RawOrderDTO) -> BundleDTO:
+        log_debug('Bundle Service', 'Converting RawOrderDTO to BundleDTO')
         return BundleDTO(
             bundle_name=raw_order.product['human_name'],
             amount_spent=raw_order.amount_spent,
@@ -26,6 +31,7 @@ class BundleService(object):
     def retrieve_remote_bundles_with_credentials(self, session: str, csrf: str) -> None:
         raw_orders: List[RawOrderDTO] = self.network_service.fetch_raw_orders(session=session, csrf=csrf)
         [self.bundle_repository.create(self._convert_raw_order_to_bundle(x)) for x in raw_orders]
+        log_debug('Bundle Service', 'Retrieved remote bundles with credentials')
 
 
 
