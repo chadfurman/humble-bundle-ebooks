@@ -84,22 +84,22 @@ class NetworkService(object):
         order = order_response.json()
         log_debug('Network Service', 'Converted raw order response to json')
         return RawOrderDTO(
-            amount_spent=order['amount_spent'],
-            product=order['product'],
-            gamekey=order['gamekey'],
-            uid=order['uid'],
-            all_coupon_data=order['all_coupon_data'],
-            created=order['created'],
-            missed_credit=order['missed_credit'],
-            subproducts=order['subproducts'],
-            total_choices=order['total_choices'],
-            tpkd_dict=order['tpkd_dict'],
-            choices_remaining=order['choices_remaining'],
-            currency=order['currency'],
-            is_giftee=order['is_giftee'],
-            claimed=order['claimed'],
-            total=order['total'],
-            path_ids=order['path_ids'],
+            amount_spent=order.get('amount_spent'),
+            product=order.get('product'),
+            gamekey=order.get('gamekey'),
+            uid=order.get('uid'),
+            all_coupon_data=order.get('all_coupon_data'),
+            created=order.get('created'),
+            missed_credit=order.get('missed_credit'),
+            subproducts=order.get('subproducts'),
+            total_choices=order.get('total_choices'),
+            tpkd_dict=order.get('tpkd_dict'),
+            choices_remaining=order.get('choices_remaining'),
+            currency=order.get('currency'),
+            is_giftee=order.get('is_giftee'),
+            claimed=order.get('claimed'),
+            total=order.get('total'),
+            path_ids=order.get('path_ids'),
         )
 
 
