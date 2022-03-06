@@ -16,6 +16,7 @@ setup(name='humble-bundle-api',
           "sqlalchemy",
           "black",
           "graphene>=2.0",
+          "requests",
           "bs4",
           "sqlitedict"])
 
