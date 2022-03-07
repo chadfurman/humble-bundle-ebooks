@@ -46,6 +46,13 @@ class MockResponse(Mock):
 mock_requests = MockRequests()
 
 
+def test_get_auth_key():
+    mock_username = 'lotus'
+    mock_password = 'lpwd'
+    network_service = NetworkService(requests=mock_requests)
+    session_key, csrf_key = network_service.get_auth_keys(username=mock_username, password=mock_password)
+
+
 def test_fetch_raw_orders():
     mock_session_key = "mock_session_key"
     mock_csrf_key = "mock_csrf_key"

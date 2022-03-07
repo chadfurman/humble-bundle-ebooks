@@ -37,6 +37,11 @@ class NetworkService(object):
         self.library_page_url = library_page_url
         self.order_endpoint_url = order_endpoint_url
 
+    def get_auth_keys(self, username, password):
+        print(username)
+        print(password)
+        pass
+
     def fetch_raw_orders(self, session, csrf, ignore_sleep=False) -> List[RawOrderDTO]:
         '''
         .. function:: refresh_cache()
